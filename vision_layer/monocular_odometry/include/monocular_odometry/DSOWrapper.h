@@ -1,7 +1,9 @@
-#pragma once
+#ifndef __DSOWRAPPER_H__
+#define __DSOWRAPPER_H__
+
 #include "boost/thread.hpp"
-#include "util/MinimalImage.h"
 #include "IOWrapper/Output3DWrapper.h"
+#include "util/MinimalImage.h"
 
 #include "FullSystem/HessianBlocks.h"
 #include "util/FrameShell.h"
@@ -14,13 +16,13 @@ namespace dso {
 
   namespace IOWrap {
 
-    class DSOOutputWrapper : public Output3DWrapper {
+    class DSOWrapper : public Output3DWrapper {
     public:
-      inline SampleOutputWrapper() {
+      inline DSOWrapper() {
           printf("Hello DSO\n");
       }
 
-      virtual ~SampleOutputWrapper() {
+      virtual ~DSOWrapper() {
           printf("Goodbye DSO\n");
       }
 
@@ -70,3 +72,5 @@ namespace dso {
     };
   }
 }
+
+#endif
