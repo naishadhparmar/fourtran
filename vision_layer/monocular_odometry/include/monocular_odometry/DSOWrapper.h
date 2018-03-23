@@ -1,7 +1,6 @@
 #ifndef __DSOWRAPPER_H__
 #define __DSOWRAPPER_H__
 
-#include "boost/thread.hpp"
 #include "IOWrapper/Output3DWrapper.h"
 #include "util/MinimalImage.h"
 

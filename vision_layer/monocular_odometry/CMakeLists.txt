@@ -19,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 ## System dependencies are found with CMake's conventions
+find_package(Boost 1.60.0 COMPONENTS filesystem system REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 find_package(Eigen3 REQUIRED)
 find_package(OpenCV REQUIRED)
 find_library(DSO_LIBRARY dso ${DSO_PATH}/build/lib)
@@ -110,9 +112,9 @@ message("\n\n---- DSO Library found at\n\"${DSO_LIBRARY}\"")
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-   INCLUDE_DIRS include
-#  LIBRARIES monocular_odometry
    CATKIN_DEPENDS cv_bridge geometry_msgs roscpp rospy sensor_msgs std_msgs
+#  INCLUDE_DIRS include
+#  LIBRARIES monocular_odometry
 #  DEPENDS system_lib
 )
 
@@ -123,10 +125,11 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-  ${DSO_PATH}/src
   ${DSO_PATH}/thirdparty/Sophus
+  ${DSO_PATH}/src
+  ${PROJECT_SOURCE_DIR}/src
+  ${PROJECT_SOURCE_DIR}/include
+  ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIR}
 )
 
@@ -136,7 +139,6 @@ add_executable(odometry
 )
 
 target_link_libraries(odometry
-  include
   ${catkin_LIBRARIES}
   ${DSO_LIBRARY}
   ${OpenCV_LIBS}
